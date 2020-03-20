@@ -50,7 +50,8 @@ public abstract class BlockEntityTranslator {
         int z = Integer.parseInt(String.valueOf(tag.getValue().get("z").getValue()));
 
         CompoundTagBuilder tagBuilder = getConstantBedrockTag(BlockEntityUtils.getBedrockBlockEntityId(
-                String.valueOf(tag.get("id").getValue())), x, y, z).toBuilder();
+                String.valueOf(tag.contains("id") ? tag.get("id").getValue() : tag.contains("Banner") ? "Banner" : null)), x, y, z)
+                .toBuilder();
         translateTag(tag).forEach(tagBuilder::tag);
         return tagBuilder.buildRootTag();
     }

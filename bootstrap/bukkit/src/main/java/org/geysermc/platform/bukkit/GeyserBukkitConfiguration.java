@@ -56,7 +56,7 @@ public class GeyserBukkitConfiguration implements IGeyserConfiguration {
         if (!config.contains("userAuths"))
             return;
 
-        for (String key : config.getConfigurationSection("userAuths").getKeys(false)) {
+        for Unsup(String key : config.getConfigurationSection("userAuths").getKeys(false)) {
             userAuthInfo.put(key, new BukkitUserAuthenticationInfo(key));
         }
     }
