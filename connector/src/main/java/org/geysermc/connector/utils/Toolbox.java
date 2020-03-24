@@ -40,6 +40,7 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 
 import org.geysermc.connector.GeyserConnector;
 import org.geysermc.connector.network.translators.item.ItemEntry;
+import org.geysermc.connector.sound.SoundMap;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -137,6 +138,9 @@ public class Toolbox {
             }
         }
         CREATIVE_ITEMS = creativeItems.toArray(new ItemData[0]);
+
+        /* Load sound mappings */
+        SoundMap.get();
     }
 
     public static InputStream getResource(String resource) {
