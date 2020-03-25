@@ -16,7 +16,7 @@ public class JavaPlayBuiltinSoundTranslator extends PacketTranslator<ServerPlayB
 
         SoundMap.SoundMapping soundMapping = SoundMap.get().fromJava(packetSound);
         session.getConnector().getLogger()
-                .debug("Sound mapping " + packetSound + " -> "
+                .debug("[Builtin] Sound mapping " + packetSound + " -> "
                         + soundMapping + (soundMapping == null ? "[not found]" : "")
                         + " - " + packet.toString());
         if(soundMapping == null) {
@@ -26,17 +26,17 @@ public class JavaPlayBuiltinSoundTranslator extends PacketTranslator<ServerPlayB
         LevelSoundEventPacket soundPacket = new LevelSoundEventPacket();
         SoundEvent sound = SoundMap.toSoundEvent(soundMapping.getBedrock());
         if(sound == null) {
-            sound = SoundMap.toSoundEvent(soundMapping.getNukkit());
+            sound = SoundMap.toSoundEvent(soundMapping.getBedrock());
             if(sound == null) {
                 sound = SoundMap.toSoundEvent(packetSound);
                 if(sound == null) {
                     session.getConnector().getLogger()
-                            .debug("Sound for original " + packetSound + " to mappings " + packetSound
+                            .debug("[Builtin] Sound for original " + packetSound + " to mappings " + soundPacket
                                     + " was not a playable level sound, or has yet to be mapped to an enum in " +
                                     "NukkitX SoundEvent ");
                 } else {
                     session.getConnector().getLogger()
-                            .debug("Sound for original " + packetSound + " to mappings " + packetSound
+                            .debug("[Builtin] Sound for original " + packetSound + " to mappings " + soundPacket
                                     + " was not found in NukkitX SoundEvent, but original packet sound name was.");
                 }
                 return;

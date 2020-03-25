@@ -43,7 +43,7 @@ public class SoundMap {
                     new SoundMapping(
                             next.getKey(),
                             brMap.has("bedrock_mapping") && brMap.get("bedrock_mapping").isTextual() ? brMap.get("bedrock_mapping").asText() : null,
-                            brMap.has("nukkit_mapping") && brMap.get("nukkit_mapping").isTextual() ? brMap.get("nukkit_mapping").asText() : null
+                            brMap.has("playsound_mapping") && brMap.get("playsound_mapping").isTextual() ? brMap.get("playsound_mapping").asText() : null
                     )
             );
         }
@@ -128,25 +128,33 @@ public class SoundMap {
         }
     }
 
+    public static boolean validateVolume(float f) {
+        return (f >= 0.0F && f <= 1.0F);
+    }
+
+    public static boolean validatePitch(float f) {
+        return (f >= 0.5F && f <= 2.0F);
+    }
+
     @Data
     @ToString
     public static class SoundMapping {
         private final String java;
         private final String bedrock;
-        private final String nukkit;
+        private final String playsound;
 
-        public SoundMapping(String java, String bedrock, String nukkit) {
+        public SoundMapping(String java, String bedrock, String playsound) {
             this.java = java;
             this.bedrock = bedrock == null || bedrock.equalsIgnoreCase("") ? null : bedrock;
-            this.nukkit = nukkit == null || nukkit.equalsIgnoreCase("") ? null : nukkit;
-        }
-
-        public boolean hasNukkit() {
-            return this.nukkit != null;
+            this.playsound = playsound == null || playsound.equalsIgnoreCase("") ? null : playsound;
         }
 
         public boolean hasBedrock() {
-            return this.nukkit != null;
+            return this.bedrock != null;
+        }
+
+        public boolean hasPlaysound() {
+            return this.playsound != null;
         }
 
         public boolean hasJava() {
